@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import List from './views/List.vue';
 import Detail from './views/Detail.vue';
+import Order from './views/Order.vue'
 Vue.use(Router);
 
 export default new Router({
@@ -18,6 +19,12 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: List,
+
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: Order,
 
     },
     {
