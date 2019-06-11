@@ -3,12 +3,12 @@
     <!---->
     <div data-v-172bb70c data-v-bc186c1a class="content app-view app-view-with-footer">
       <header data-v-172bb70c class="hd">
-        <div data-v-172bb70c class="user ui-flex align-center">
+        <router-link to="/signin" data-v-172bb70c class="user ui-flex align-center">
           <div data-v-172bb70c class="img">
             <img data-v-172bb70c src="../assets/avatar.76a75b8f17.png">
           </div>
           <div data-v-172bb70c class="name">登录/注册</div>
-        </div>
+        </router-link>
         <!---->
       </header>
       <div data-v-172bb70c class="b1 ui-flex align-center justify-space-between">

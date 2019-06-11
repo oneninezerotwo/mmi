@@ -2365,15 +2365,35 @@
 
 
 
-
-
-
-
-
-
-
-
-
+<script lang="js">
+// import Vue from 'vue';
+// export default Vue.extend ({
+//   data(){
+//     return{
+//       contents:[],
+//       id:0,
+//     }
+//   },
+//   created(){
+//     this.getList();
+//     this.getOrder();//获取列表页传过来的id
+//   },
+//   methods:{
+//     async getList() {
+//       const data = await this.$axios(
+//         "https://www.easy-mock.com/mock/5cf6520f58e5451e010fa98a/example/xmdetail"
+//       );
+//       console.log(data);
+//       this.contents = [...this.contents,...data.data.data];
+//     },
+//     getOrder(){
+//       this.id=this.$route.params && this.$route.params.id
+//       console.log(this.id)
+//       //获取列表页传过来的id
+//     }
+//   }
+// })
+</script>
 
 
 
@@ -2387,7 +2407,6 @@
 
 
 <style lang="scss" scoped>
-
 html {
   font-size: 52.0833px;
 }
@@ -2460,8 +2479,8 @@ img[lazy="loaded"] {
   display: block;
 }
 .image_w_1080 img[data-v-ccdb1440] {
-    display: block;
-    width: 100%;
-    height: auto;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 </style>

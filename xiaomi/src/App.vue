@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <router-view/>
     <Footer/>
+    <Loading/>
   </div>
 </template>
 
 
 <script lang="js">
 import Footer from './components/Footer';
+import Loading from './components/Loading'
 import Vue from 'vue';
+
 export default Vue.extend({
   components: {
     Footer,
+    Loading,
   },
 });
 </script>
@@ -30,4 +30,5 @@ export default Vue.extend({
 html{
     font-size: 52.0833px;
 }
+
 </style>
