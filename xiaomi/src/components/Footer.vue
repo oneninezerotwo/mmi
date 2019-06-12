@@ -68,6 +68,24 @@ export default Vue.extend({
 </script>
 
 
+<style lang="scss" scoped>
+.app-bottom-navigator-wrapper .box-flex{
+    height: 52px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    -webkit-transition: -webkit-transform 0.2s ease-out;
+    transition: -webkit-transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+    -webkit-box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+}
+</style>
+
+
 
 
 
