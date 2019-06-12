@@ -4,6 +4,8 @@ import Home from './views/Home.vue';
 import List from './views/List.vue';
 import Cart from './views/Cart.vue';
 import Detail from './views/Detail.vue';
+import Order from './views/Order.vue'
+import SignIn from './views/SignIn.vue'
 Vue.use(Router);
 
 export default new Router({
@@ -22,6 +24,13 @@ export default new Router({
 
     },
     {
+      path: '/order',
+      name: 'order',
+      component: Order,
+
+    },
+    {
+      // path: '/detail',
       path: '/detail/:id',
       name: 'detail',
       component: Detail,
@@ -31,6 +40,11 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component:Cart,
+    },{
+      path: '/signin',
+      name: 'signin',
+      component: SignIn,
+
     },
     {
       path: '/about',

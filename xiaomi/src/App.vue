@@ -3,22 +3,23 @@
     
     <router-view/>
     <Footer/>
+    <Loading/>
   </div>
 </template>
 
 
 <script lang="js">
 import Footer from './components/Footer';
+import Loading from './components/Loading'
 import Vue from 'vue';
+
 export default Vue.extend({
   components: {
     Footer,
+    Loading,
   },
 });
 </script>
-
-
-
 
 
 <style lang="scss">
@@ -29,4 +30,5 @@ export default Vue.extend({
 html{
     font-size: 52.0833px;
 }
+
 </style>
