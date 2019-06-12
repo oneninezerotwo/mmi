@@ -21,9 +21,6 @@ export default Vue.extend({
 </script>
 
 
-
-
-
 <style lang="scss">
 @import url(./assets/css/list.css);
 @import url(./assets/css/xmdetail.css);

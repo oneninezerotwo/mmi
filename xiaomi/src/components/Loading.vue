@@ -14,11 +14,11 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend( {
-  computed:{
-    //实时计算isFixed的状态值给v层进行判断
-    isLoading(){
-      return this.$store.state.isLoading
-    }
-  }
-})
+  computed: {
+    // 实时计算isFixed的状态值给v层进行判断
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+  },
+});
 </script>

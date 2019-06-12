@@ -5,12 +5,7 @@
       <div data-v-ccdb1440 id="commodityDetail" class="container fluid app-product-container">
         <header data-v-ccdb1440>
           <div data-v-ccdb1440 class="fill-height layout align-center">
-            <a
-              data-v-ccdb1440
-              class="header-btn"
-              data-stat-id="434a4d17f6cdeefd"
-              onclick="_msq.push(['trackEvent', '118c59da70c1c38c-434a4d17f6cdeefd', '', 'pcpid', '']);"
-            >
+            <a data-v-ccdb1440 class="header-btn" data-stat-id="434a4d17f6cdeefd" @click="back()">
               <i data-v-ccdb1440 class="image-icons header-icon icon-back"></i>
             </a>
             <div data-v-ccdb1440 class="placeholder"></div>
@@ -95,7 +90,11 @@
             <!---->
             <!---->
             <div data-v-ccdb1440 class="overview overview-goods-name">
-              <div data-v-ccdb1440 class="goods-name ui-flex align-center justify-start fz-xl">
+              <div
+                data-v-ccdb1440
+                class="goods-name ui-flex align-center justify-start fz-xl"
+                v-text="goods_info.name"
+              >
                 <!---->
                 Redmi K20 Pro
               </div>
@@ -115,8 +114,8 @@
           <div data-v-ccdb1440 class="product_info_product_price">
             <div data-v-ccdb1440 class="overview product_info_product_price">
               <div data-v-ccdb1440 class="goods-price layout align-end justify-start">
-                <div data-v-ccdb1440 class="price cur-price">
-                  2999
+                <div data-v-ccdb1440 class="price cur-price" v-text="goods_info.market_price">
+                  <!-- 2999 -->
                   <!---->
                 </div>
                 <!---->
@@ -2316,16 +2315,15 @@
       <!---->
       <footer data-v-ccdb1440>
         <div data-v-ccdb1440 class="fill-height layout align-center bgw">
-          <a
+          <router-link
+            to="/"
             data-v-ccdb1440
-            href="/"
             class="footer-btn router-link-active"
-            onclick="_msq.push(['trackEvent', '118c59da70c1c38c-2e0de3d3347aa6ac', '/', 'pcpid', '']);window._msq &amp;&amp; window._msq.push(['trackEvent', 'product-detail-home-btn', '/product/view'])"
             data-stat-id="2e0de3d3347aa6ac"
           >
             <i data-v-ccdb1440 class="image-icons footer-icon icon-home"></i>
             <span data-v-ccdb1440>首页</span>
-          </a>
+          </router-link>
           <a
             data-v-ccdb1440
             onclick="_msq.push(['trackEvent', '118c59da70c1c38c-01f4f7898d729b22', '', 'pcpid', '']);window._msq &amp;&amp; window._msq.push(['trackEvent', 'product-detail-cart-btn', '/product/view'])"
@@ -2334,7 +2332,7 @@
           >
             <i data-v-ccdb1440 class="image-icons footer-icon icon-cart"></i>
             <span data-v-ccdb1440>购物车</span>
-            <em data-v-ccdb1440 class="bubble">1</em>
+            <em data-v-ccdb1440 class="bubble" v-text="total_qty">1</em>
           </a>
           <div data-v-ccdb1440 class="action-box flex">
             <a
@@ -2342,7 +2340,7 @@
               data-log_code
               class="btn buy-btn"
               data-stat-id="d57f8c9f3892155b"
-              onclick="_msq.push(['trackEvent', '118c59da70c1c38c-d57f8c9f3892155b', '', 'pcpid', '']);"
+              @click="dropToCart(1)"
             >加入购物车</a>
           </div>
         </div>
@@ -2366,33 +2364,136 @@
 
 
 <script lang="js">
-// import Vue from 'vue';
-// export default Vue.extend ({
-//   data(){
-//     return{
-//       contents:[],
-//       id:0,
-//     }
-//   },
-//   created(){
-//     this.getList();
-//     this.getOrder();//获取列表页传过来的id
-//   },
-//   methods:{
-//     async getList() {
-//       const data = await this.$axios(
-//         "https://www.easy-mock.com/mock/5cf6520f58e5451e010fa98a/example/xmdetail"
-//       );
-//       console.log(data);
-//       this.contents = [...this.contents,...data.data.data];
-//     },
-//     getOrder(){
-//       this.id=this.$route.params && this.$route.params.id
-//       console.log(this.id)
-//       //获取列表页传过来的id
-//     }
-//   }
-// })
+import Vue from 'vue';
+export default Vue.extend ({
+  data(){
+    return{
+      goods_info:{},
+      id:0,
+      total_qty:0,
+      currQty:0,
+
+    }
+  },
+  created(){
+    this.getOrderId();//获取列表页传过来的id
+    this.getList();//根据id获取相应的数据
+    this.checkQty();//查询当前用户在购物车的商品件数
+    
+  },
+  methods:{
+    async getList() {
+    
+      const data = await this.$axios(
+        "https://www.easy-mock.com/mock/5cf6520f58e5451e010fa98a/example/xmdetail"+this.id
+      );
+    
+      console.log(data);
+      this.goods_info = {...this.goods_info,...data.data.data.goods_info[0]};
+    },
+    getOrderId(){
+      this.id=this.$route.params && this.$route.params.id
+      console.log(this.id)
+      //获取列表页传过来的id
+    },
+     back(){
+        this.$router.go(-1);//返回上一层
+    },
+    dropToCart(){
+      this.checkCurrItem(res=>{
+        // console.log(res,err)
+        if(res){
+          console.log(res)
+          var name = 'RYAN';
+          var qty = 1;
+          var goods_id=this.id;
+          this.$http.post('/api/user/addUser', {
+            
+          username: name,
+          quantity:qty,
+          goodsId:goods_id
+
+          },{}).then((response) => {
+          console.log(response);
+          this.checkQty();
+         })
+        };
+          if(!res){
+          console.log('已经有了')
+          this.currQty ++
+          this.updateQty() //更新数量
+          this.checkQty()
+        }
+    
+      })
+    
+  },
+  checkQty(){
+  var name = 'RYAN';
+  var goods_id = this.id;
+  this.total_qty=0;//每次点击重新获取当前用户最新的购物车里商品条数
+  this.$http.post('/api/user/ser', {
+      
+      username:name,
+      goodsId:goods_id
+      },{}).then((response) => {
+      console.log(response);
+      response.body.forEach(obj => { //遍历数组里面的对象并且让指定项目累加
+         this.total_qty +=obj.qty
+     
+      });
+      console.log(this.total_qty)
+
+  })
+},
+checkCurrItem(res){
+    var name = 'RYAN';
+  var goods_id = this.id;
+  this.$http.post('/api/user/checkCurr', {
+       //后端接口路径
+      username:name,
+      goodsId:goods_id
+      },{}).then((response) => {
+      console.log(response);
+
+        if(response.body==false){//数据库没有这条商品id []==false? >true
+
+         return res(true);
+        }else if(response.body){
+          //  this.currQty=response.body.qty
+          //  console.log(this.currQty)
+          return res(false);
+        }
+       
+      // console.log(this.total_qty)
+
+
+  })
+},
+   updateQty(){
+  var name = 'RYAN';
+  var goods_id = this.id;
+  var qty = this.currQty;
+  this.$http.post('/api/user/upd', {
+                  //后端接口路径
+      username:name,
+      goodsId:goods_id,
+      quantity:qty,
+      },{}).then((response) => {
+      console.log(response);
+ 
+
+
+  })
+},
+
+  
+
+  }
+    
+ 
+ 
+})
 </script>
 
 
@@ -2407,6 +2508,8 @@
 
 
 <style lang="scss" scoped>
+@import url(../assets/css/list.css);
+@import url(../assets/css/xmdetail.css);
 html {
   font-size: 52.0833px;
 }

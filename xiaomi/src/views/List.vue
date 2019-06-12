@@ -37,7 +37,7 @@
           <ul data-v-06d70f2d v-if="1">
             <li
               class="nav-btn"
-              :class="{'active':active}"
+             :class="{'active':idx==num}"
               data-v-06d70f2d
               categoryid="653"
               @click="setFloorNavMountClick(idx)"
@@ -140,14 +140,23 @@ export default Vue.extend({
       btn:0,
       floorIndex: 1,
       active:false,
-
+      num:0,
+    
     };
   },
   created() {
     this.getList();
+
+
   },
-  mounted () {
-        this.initPage();
+  mounted() {
+    this.$nextTick(()=>{
+      setTimeout(() => {
+           this.initPage()
+
+      }, );
+    })
+
         },
   methods: {
     async getList() {
@@ -167,7 +176,7 @@ export default Vue.extend({
                     floor_offsetTop = floor_item[index].offsetTop - floor_item[0].offsetTop,
                     window_scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
                     timer = {
-                        step: 50,
+                        step: 100,
                         times: 20,
                         FLOOR_OFFSETTOP: floor_offsetTop,
                     };
@@ -207,7 +216,6 @@ export default Vue.extend({
              * @params Object timer 定时器配置
              */
             setFloorScrollArrowDown (timer) {
-          
                 var _this = this;
                 clearInterval(timer_timer);
                 timer_timer = setInterval(() => {
@@ -227,19 +235,20 @@ export default Vue.extend({
          * 监听窗口滚动楼层导航动态定位
          */
             floorSrcollAddEventListener () {
+          
             var _this = this;
-            let nav_item = document.getElementById('list-navbar').getElementsByClassName('nav-btn'),
+            var nav_item = document.getElementById('list-navbar').getElementsByClassName('nav-btn'),
                 floor_item = document.getElementsByClassName('list-item');
-             nav_item[0].className = 'nav-btn active';
-            
+                console.log(nav_item)
+
               window.onscroll = function () {
-                  // console.log(nav_item[0]);
+             
                 let window_scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                 for (let i = 0, len = floor_item.length; i < len; i++) {
                     let floor_offsetTop = floor_item[i].offsetTop - floor_item[0].offsetTop;
                     if (window_scrollTop >= floor_offsetTop) {
                         for (let n = 0, len = nav_item.length; n < len; n++) {
-                            nav_item[n].className = 'nav-btn' + (i === n ? 'active' : '');
+                            _this.num=i;
                         }
                     }
                 }
@@ -253,7 +262,8 @@ export default Vue.extend({
         initPage () {
                 var _this = this;
                 _this.floorSrcollAddEventListener();
-            }
+        }
+            
       },
 });
 </script>
