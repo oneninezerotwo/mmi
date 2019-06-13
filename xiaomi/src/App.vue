@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    
     <router-view/>
-    <Footer/>
+    <Footer />
     <Loading/>
   </div>
 </template>
@@ -18,6 +17,7 @@ export default Vue.extend({
     Footer,
     Loading,
   },
+
 });
 </script>
 

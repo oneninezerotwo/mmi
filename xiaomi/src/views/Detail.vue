@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-
-  <template>
-    
-  </template>
-  <script>
-
-  export default {
-    data(){
-      return{
-
-      }
-    },
-    mounted(){
-
-    },
-    created(){
-      
-      let id = this.$route.params.id
-      console.log(id)
-      //http
-    }
-  }
-  </script>
-  
-  
-  <style lang="scss" scoped>
-
-  </style>  
-  
-    
-=======
 <template>
   <div data-v-bc186c1a class="app-view-wrapper">
     <!---->
@@ -2619,4 +2587,3 @@ img[lazy="loaded"] {
   height: auto;
 }
 </style>
->>>>>>> b7594f9edd916aa7c0a8c3228322027482a0e295

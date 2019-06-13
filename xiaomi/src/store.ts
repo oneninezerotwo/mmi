@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isFixed: 0,
     isLoading: 0,
     scroll: 0,
+    isShow:true,
   },
   mutations: {
 

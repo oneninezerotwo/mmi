@@ -2,14 +2,14 @@
   <div data-v-bc186c1a class="app-shell app-shell-bottom-navigation">
     <header data-v-266b4a99 data-v-bc186c1a class="app-header-wrapper app-shell-header" style>
       <div data-v-266b4a99 class="app-header-left">
-        <a
+        <router-link to="/list"
           data-v-266b4a99
           class="app-header-item"
           data-stat-id="978dac80bd9946f9"
           onclick="_msq.push(['trackEvent', 'aa6b36fbc8a2bd55-978dac80bd9946f9', '', 'pcpid', '']);"
         >
           <i data-v-266b4a99 class="image-icons app-header-icon icon-back"></i>
-        </a>
+       </router-link>
         <!---->
       </div>
       <div data-v-266b4a99 class="app-header-middle">

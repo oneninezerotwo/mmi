@@ -37,7 +37,8 @@
           <ul data-v-06d70f2d v-if="1">
             <li
               class="nav-btn"
-             :class="{'active':idx==num}"
+              :class="{'active':idx==num}"
+              :style="{'transform':(num!=0&&12<=num)?'translateY(-10.8rem)':''}"
               data-v-06d70f2d
               categoryid="653"
               @click="setFloorNavMountClick(idx)"
@@ -129,36 +130,6 @@
 
 </template>
 
-<<<<<<< HEAD
-<script>
-export default {
-  data(){
-    return{
-      datalist:[
-        {
-          name:'aaa',
-          uid:95
-        },
-        {
-          name:'bbb',
-          uid:96
-        }
-      ],
-    }
-  },
-  methods:{
-    a(b){
-      this.$router.push({ name:'detail',params:{id:b}})
-    }
-  }
-}
-</script>
-
-<style lang='scss'>
-
-</style>
-
-=======
 <script lang="js">
 import Vue from "vue";
 var timer_timer = null;
@@ -170,6 +141,8 @@ export default Vue.extend({
       floorIndex: 1,
       active:false,
       num:0,
+      btn_h:0,
+      floor_h:0,
     
     };
   },
@@ -183,7 +156,7 @@ export default Vue.extend({
       setTimeout(() => {
            this.initPage()
 
-      }, );
+      },20 );
     })
 
         },
@@ -268,11 +241,12 @@ export default Vue.extend({
             var _this = this;
             var nav_item = document.getElementById('list-navbar').getElementsByClassName('nav-btn'),
                 floor_item = document.getElementsByClassName('list-item');
-                console.log(nav_item)
+                // console.log(nav_item)
 
               window.onscroll = function () {
-             
+               
                 let window_scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    
                 for (let i = 0, len = floor_item.length; i < len; i++) {
                     let floor_offsetTop = floor_item[i].offsetTop - floor_item[0].offsetTop;
                     if (window_scrollTop >= floor_offsetTop) {
@@ -281,6 +255,7 @@ export default Vue.extend({
                         }
                     }
                 }
+                
             };
         },
         goToDetail(id){
@@ -291,6 +266,8 @@ export default Vue.extend({
         initPage () {
                 var _this = this;
                 _this.floorSrcollAddEventListener();
+              
+
         }
             
       },
@@ -302,5 +279,7 @@ export default Vue.extend({
   width: 120px;
   height: 120px;
 }
+.move{
+  transform: translateY(-0.9rem);
+}  
 </style>
->>>>>>> b7594f9edd916aa7c0a8c3228322027482a0e295

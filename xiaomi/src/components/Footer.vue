@@ -1,5 +1,6 @@
 <template>
   <footer
+    v-show="isShowFooter"
     data-v-7c04fb90
     data-v-bc186c1a
     class="app-bottom-navigator-wrapper app-shell-footer"
@@ -53,10 +54,17 @@ export default Vue.extend({
       ],
       tab: -1,
       url_name:'',
+      isShow:true,
     };
   },
   watch: {//监听路由变化
-  '$route':'getUrlName'
+  '$route':'getUrlName',
+    
+  },
+     computed:{
+    isShowFooter(){
+      return this.isShow
+    }
   },
   methods: {
     active(currIdx) {
@@ -72,20 +80,30 @@ export default Vue.extend({
       this.url_name=this.$route.path.slice(1);//截取掉 "/"
       if(!this.url_name){ //如果url路径为空,则显示首页按钮高亮
         this.url_name='home';
+      
+      }else if(this.url_name=='signin' || this.url_name == 'cart'){//注册页/购物车页不显示底部菜单栏
+          this.isShow=false;
+
+      }else{
+         this.isShow=true;
       }
-      console.log(this.url_name)
+      // console.log(this.url_name)
       //获取列表页传过来的id
     }
   },
 
    mounted() {
       this.getUrlName();
-      // console.log(this.$route.params )
     }
    
  
 });
 </script>
+
+
+
+
+
 
 
 <style lang="scss" scoped>
